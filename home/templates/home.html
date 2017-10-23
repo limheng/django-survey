@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div class="container">
+    <h1>Welcome to Survey App!</h1>
+    <h3>Please make sure cookies are enabled before starting.</h3>
+    <br>
+    <a class="btn btn-primary" href="{% url 'question' %}" role="button">Start Survey</a>
+  </div>
+
+{% endblock %}

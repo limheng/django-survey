@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block head %}
+<script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript">//<![CDATA[
+  $(window).load(function(){
+  $("input:radio").change(function () {$("#btn-choice").prop("disabled", false);});
+  });//]]>
+
+</script>
+{% endblock %}
+{% block body %}
+<div class="container">
+  <h1>{{ progress}}. {{ question }}</h1>
+  <form method="post">{% csrf_token %}
+    {% for answer in answers %}
+      <h3><input type="radio" name="choice" value="{{ answer }}"> {{ answer }}<h3>
+    {% endfor %}
+  <br>
+  <button type="submit" id="btn-choice" class="btn btn-primary" disabled>Submit</button>
+  </form>
+</div>
+
+
+{% endblock %}

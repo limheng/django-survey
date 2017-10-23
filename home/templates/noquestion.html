@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div class="container">
+    <h1>Oops!</h1>
+    {% if user.is_authenticated %}
+      <h3>Please click the add questions link to add survey questions.</h3>
+    {% else %}
+      <h3>There are currently no survey questions at this time.</h3>
+      <h3>Please login and add survey questions.</h3>
+      <br>
+      <form method="post" action="{% url 'account:login' %}">{% csrf_token %}
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    {% endif %}
+  </div>
+
+{% endblock %}
