@@ -19,6 +19,7 @@ mysql>CREATE DATABASE surveydb;
 ### Migrate Data/Create Admin
 
 ```shell
+dir/surveyapp>python manage.py makemigrations
 dir/surveyapp>python manage.py migrate
 dir/surveyapp>python manage.py createsuperuser
 ```
