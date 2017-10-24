@@ -33,3 +33,6 @@ dir/surveyapp>python manage.py loaddata preload_data.json
 ```shell
 dir/surveyapp>python manage.py runserver
 ```
+
+### Information
+###### Signing in as an admin will reissue another session (restarting the survey process).
