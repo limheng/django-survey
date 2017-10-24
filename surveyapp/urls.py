@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^account/', include('account.urls', namespace='account')),
     url(r'^$', views.home, name='home'),
+    url(r'^review/$', views.review, name='review'),
     url(r'^question/$', QuestionView.as_view(), name='question'),
 ]

@@ -1,15 +1,30 @@
 {% extends 'base.html' %}
 {% block body %}
+
   <div class="container">
-    <h1>Dashboard page</h1>
-    <h3>questions answered: {{ questions_answered }}</h3>
-    <h3>surveys completed: {{ surveys_completed }}</h3>
-    <h3>total questions: {{ total_questions }}</h3>
-    <br>
-    {% for r in results %}
-      <h5>{{ r.question }}</h5>
-      <h5>{{ r.answer }}</h5>
-    {% endfor %}
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="mt-5">Administraion Dashboard</h1>
+        <p class="lead">Get up to date updates and statics!</p>
+        <div class="row">
+          <div class="col-4">
+            <p>Surveys Completed: </p><p><h1>{{ surveys_completed }}</h1></p>
+          </div>
+          <div class="col-4">
+            <p>Survey Questions: </p><p><h1>{{ total_questions }}</h1></p>
+          </div>
+          <div class="col-4">
+            <p>Questions Answered: </p><p><h1>{{ questions_answered }}</h1></p>
+          </div>
+        </div>
+        <ul class="list-unstyled txt-left">
+          {% for r in results %}
+            <li>{{ r.question }}</li>
+            <li>{{ r.answer }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
   </div>
 
 {% endblock %}

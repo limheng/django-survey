@@ -1,0 +1,50 @@
+body {
+  color: #fd9525;
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.bg-dark {
+  background-color: #f06f0a!important;
+}
+
+.btn-custom {
+    color: #fd9525;
+    background-color: transparent;
+    background-image: none;
+    border-color: #fd9525;
+}
+
+.btn-custom:hover {
+    color: #fff;
+    background-color: #fd9525;
+    border-color: #fd9525;
+}
+
+.navbar-brand {
+  font-style: italic;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.navbar-brand, .nav-link {
+  text-transform: uppercase;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.lead {
+  font-style: italic;
+}
+
+.txt-left {
+    text-align: left;
+    display: inline-block;
+}

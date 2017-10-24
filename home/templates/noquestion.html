@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 {% block body %}
+
   <div class="container">
-    <h1>Oops!</h1>
-    {% if user.is_authenticated %}
-      <h3>Please click the add questions link to add survey questions.</h3>
-    {% else %}
-      <h3>There are currently no survey questions at this time.</h3>
-      <h3>Please login and add survey questions.</h3>
-      <br>
-      <form method="post" action="{% url 'account:login' %}">{% csrf_token %}
-        <button type="submit" class="btn btn-primary">Login</button>
-      </form>
-    {% endif %}
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="mt-5">Surveys are unavailable</h1>
+        <p class="lead">Sorry! Please check back with us soon.</p>
+        <ul class="list-unstyled">
+          <li>Administration can add questions.</li>
+          <li>Would you like to sign in now?</li>
+        </ul>
+        <br>
+        <a class="btn btn-outline-warning btn-custom" href="{% url 'account:login' %}" role="button">Sign in</a>
+      </div>
+    </div>
   </div>
 
 {% endblock %}

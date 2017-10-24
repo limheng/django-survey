@@ -11,7 +11,29 @@ def home(request):
         return render(request, 'noquestion.html')
     if request.user.is_authenticated():
         return dashboard(request)
-    return render(request, 'home.html')
+    return render(request, 'home.html', context={'count': getQuestionCount()})
+
+def review(request):
+    progress = int(getCompleteCount(request.session.session_key))
+    count = getQuestionCount()
+    if count < progress:
+        count = progress
+    if count == 0:
+        return render(request, 'review.html',
+            context={'progress': 0,
+                'remain': 0,
+                'count': 0
+            }
+        )
+    perc_progress = (progress/count) * 100
+    remain = count - progress
+    perc_remain = (remain/count) * 100
+    return render(request, 'review.html',
+        context={'progress': int(perc_progress),
+            'remain': int(perc_remain),
+            'count': count
+        }
+    )
 
 class QuestionView(TemplateView):
     template_name = 'question.html'

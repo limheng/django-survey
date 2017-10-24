@@ -5,20 +5,27 @@
   $(window).load(function(){
   $("input:radio").change(function () {$("#btn-choice").prop("disabled", false);});
   });//]]>
-
 </script>
 {% endblock %}
-{% block body %}
-<div class="container">
-  <h1>{{ progress}}. {{ question }}</h1>
-  <form method="post">{% csrf_token %}
-    {% for answer in answers %}
-      <h3><input type="radio" name="choice" value="{{ answer }}"> {{ answer }}<h3>
-    {% endfor %}
-  <br>
-  <button type="submit" id="btn-choice" class="btn btn-primary" disabled>Submit</button>
-  </form>
-</div>
 
+{% block body %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="mt-5"></h1>
+        <p class="lead">{{ progress}}. {{ question }}</p>
+        <form method="post">{% csrf_token %}
+          <ul class="list-unstyled txt-left">
+            {% for answer in answers %}
+              <li><input type="radio" name="choice" value="{{ answer }}"> {{ answer }}</li>
+            {% endfor %}
+          </ul>
+          <br>
+          <button type="submit" id="btn-choice" class="btn btn-outline-warning btn-custom" disabled>Next Question</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
