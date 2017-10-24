@@ -7,7 +7,7 @@ Simple Survey system using Django Framework
 
 ### Terminal
 ```shell
-mysql>mysql -u root -p
+mysql>mysql -u username -p
 mysql>CREATE DATABASE surveydb;
 ```
 
