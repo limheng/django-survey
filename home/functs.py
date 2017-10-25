@@ -10,11 +10,6 @@ def getQuestionCount():
     """ Retrieves the total number of questions in the database."""
     return SurveyQuestion.objects.count()
 
-# def getQuestionByIndex(index):
-#     """ Retrieves the queryset of the specified index."""
-#     survey_question = SurveyQuestion.objects.order_by('id')[index]
-#     return survey_question
-
 def getQuestionById(question_id):
     """ Retrieves the queryset of the specified index."""
     survey_question = SurveyQuestion.objects.get(pk=question_id)
@@ -42,3 +37,8 @@ def getQuestionAnswers(key):
     question = getQuestionById(question_index)
     answers = getAnswers(question)
     return question, answers
+
+# def getQuestionByIndex(index):
+#     """ Retrieves the queryset of the specified index."""
+#     survey_question = SurveyQuestion.objects.order_by('id')[index]
+#     return survey_question
