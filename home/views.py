@@ -3,7 +3,6 @@ from .models import SurveyComplete
 from django.views.generic import TemplateView
 from account.views import dashboard
 from .functs import *
-from random import shuffle
 
 
 def home(request):
@@ -43,18 +42,12 @@ class QuestionView(TemplateView):
             return render(request, 'noquestion.html')
         if request.session.get('progress', None) == None:
             request.session['progress'] = 0
-            request.session['visited'] = 0
-            request.session['last_question'] = ''
-            question_indexes = [i for i in range(0, getQuestionCount())]
-            shuffle(question_indexes)
-            request.session['randomize'] = question_indexes
-        random_list = request.session['randomize']
+            request.session['last_choice'] = ()
         progress = getCompleteCount(request.session.session_key)
-        if progress >= len(random_list):
+        if checkComplete(progress):
             return render(request, 'done.html')
-        question = getQuestionByIndex(random_list[progress])
-        request.session['last_question'] = question.question
-        answers = getAnswers(question)
+        question, answers = getQuestionAnswers(request.session.session_key)
+        request.session['last_choice'] = (question.id, question.question)
         return render(request,
             self.template_name,
             context={'progress': progress+1,
@@ -66,19 +59,18 @@ class QuestionView(TemplateView):
     def post(self, request):
         progress = getCompleteCount(request.session.session_key)
         choice = request.POST.get('choice', '')
-        random_list = request.session['randomize']
         if choice != '':
-            sc = SurveyComplete(qid=random_list[progress]+1,
-                question=request.session['last_question'],
+            last_id, last_question = request.session['last_choice']
+            sc = SurveyComplete(qid=last_id,
+                question=last_question,
                 answer=choice, session=request.session.session_key
             )
             sc.save()
         progress += 1
-        if progress >= len(random_list):
+        if checkComplete(progress):
             return render(request, 'done.html')
-        question = getQuestionByIndex(random_list[progress])
-        request.session['last_question'] = question.question
-        answers = getAnswers(question)
+        question, answers = getQuestionAnswers(request.session.session_key)
+        request.session['last_choice'] = (question.id, question.question)
         return render(request,
             self.template_name,
             context={'progress': progress+1,

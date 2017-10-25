@@ -1,0 +1,200 @@
+{% load i18n static %}<!DOCTYPE html>
+<!-- {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %} -->
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %}</title>
+    {% load staticfiles %}
+    <!-- <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" /> -->
+
+    <!-- {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %} -->
+    {% block extrahead %}{% endblock %}
+    {% block responsive %}
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <!-- <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}" /> -->
+        <!-- {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}" />{% endif %} -->
+    {% endblock %}
+    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "vendor/bootstrap/css/surveyapp.css" %}" rel="stylesheet">
+
+    {% block extrastyle %}
+    {% endblock %}
+    <style>
+
+    [value~=Save] {
+      color: #fd9525;
+      background-color: transparent;
+      background-image: none;
+      border-color: #fd9525;
+      display: inline-block;
+      font-weight: 400;
+      line-height: 1.25;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      user-select: none;
+      border: 1px solid #fd9525;
+      padding: .5rem 1rem;
+      font-size: 1rem;
+      border-radius: .25rem;
+    }
+    [value~=Save]:hover {
+      color: #fff;
+      background-color: #fd9525;
+      border-color: #fd9525;
+    }
+    a {
+      color: #f06f0a;
+    }
+    a:hover {
+      color: #fd9525;
+    }
+    h2 {
+      color: #f06f0a;
+      font-style: italic;
+      font-size: 1.25rem;
+      font-weight: 300;
+      /*margin-top: 0;
+      margin-bottom: 2rem;*/
+      text-align: left;
+    }
+    .module h2 {
+      background: #ffeace;
+    }
+    .add-row {
+      text-align: left;
+    }
+    .required label, label.required {
+        font-weight: bold;
+        color: #f06f0a;
+    }
+    .inline-group .tabular tr.add-row td {
+      color: #666;
+      background: #ffeace;
+    }
+    .submit-row {
+        background: #fff;
+        border: none;
+        padding: 0 0;
+    }
+
+    .inline-group thead th {
+        padding: 8px 10px;
+    }
+    .row2 {
+      background: #fffaf3;
+    }
+    /*thead th.required {
+        color: #000;
+    }*/
+    thead th {
+        padding: 5px 10px;
+        line-height: normal;
+        text-transform: uppercase;
+        background: #f6f6f6;
+    }
+    thead th, tfoot td {
+        color: #666;
+        padding: 5px 10px;
+        font-size: 11px;
+        background: #fff;
+        border: none;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+    }
+    th {
+        font-weight: 600;
+        text-align: left;
+    }
+    .module table {
+      border-collapse: collapse;
+    }
+    </style>
+
+  </head>
+  {% load i18n %}
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        {% if user.is_authenticated %}
+          <a class="navbar-brand" href="{% url 'account:dashboard' %}">Survey App</a>
+        {% else %}
+          <a class="navbar-brand" href="{% url 'home' %}">Survey App</a>
+        {% endif %}
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'account:dashboard' %}">Dashboard</a>
+              </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'admin:index' %}home/surveyquestion/add/">Survey</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'account:logout' %}">Sign out</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home
+                  <!-- <span class="sr-only">(current)</span> -->
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'question' %}">Survey</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'review' %}">Review</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'account:login' %}">Sign in</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+
+    <!-- Content -->
+          <div id="content" class="{% block coltype %}colM{% endblock %}">
+              {% block pretitle %}{% endblock %}
+              {% block content_title %}{% if title %}<h1 class="mt-5">{{ title }}</h1>{% endif %}{% endblock %}
+              {% block content %}
+              {% block object-tools %}{% endblock %}
+              {{ content }}
+              {% endblock %}
+              {% block sidebar %}{% endblock %}
+              <br class="clear" />
+          </div>
+    <!-- END Content -->
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+
+  </body>
+
+</html>

@@ -18,3 +18,5 @@ class SurveyCompleteAdmin(admin.ModelAdmin):
 
 admin.site.register(SurveyQuestion, SurveyQuestionAdmin)
 admin.site.register(SurveyComplete, SurveyCompleteAdmin)
+admin.site.site_header = 'Survey App'
+admin.site.site_title = 'Survey App'
