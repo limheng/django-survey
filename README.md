@@ -1,7 +1,7 @@
 # django-survey
 Simple Survey system using Django Framework.
 
-* Features:
+### Features
   * Use of session keys and session variables.
   * Basic Django ORM functionality.
   * Django fixtures through JSON.
