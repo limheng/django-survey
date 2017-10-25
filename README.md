@@ -1,11 +1,19 @@
 # django-survey
-Simple Survey system using Django Framework
+Simple Survey system using Django Framework.
+
+* Features:
+  * Use of session keys and session variables.
+  * Basic Django ORM functionality.
+  * Django fixtures through JSON.
+  * Default Django user login functionality.
+  * Bootstrap templates with Jinja 2.
+  * Use of Django admin templates.
 
 ### Dependancy
 ###### Django==1.11.3
 ###### mysqlclient==1.3.12
 
-### Terminal
+### MySQL Commands
 ```shell
 mysql>mysql -u username -p
 mysql>CREATE DATABASE surveydb;
@@ -16,7 +24,7 @@ mysql>CREATE DATABASE surveydb;
 ###### 'USER': 'root',
 ###### 'PASSWORD': 'admin'
 
-### Migrate Data/Create Admin
+### Migrate/Create Admin
 
 ```shell
 dir/surveyapp>python manage.py makemigrations
@@ -35,4 +43,4 @@ dir/surveyapp>python manage.py runserver
 ```
 
 ### Information
-###### Signing in as an admin will reissue another session (restarting the survey process).
+###### Signing in as an admin will reissue another session key (restarting the survey process).
