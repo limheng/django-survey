@@ -185,7 +185,7 @@ div.breadcrumbs {
                 {% if site_url %}
                     <!-- <a href="{{ site_url }}">{% trans 'View site' %}</a> / -->
                     <a href="{{ site_url }}">{% trans 'Dashboard' %}</a> /
-                    <a href="{% url 'admin:index'%}home/surveyquestion/add/">{% trans 'Questions' %}</a> /
+                    <a href="{% url 'admin:index'%}home/surveyquestion/">{% trans 'Questions' %}</a> /
                     <a href="{% url 'admin:index'%}home/surveycomplete/">{% trans 'Records' %}</a> /
                 {% endif %}
                 {% if user.is_active and user.is_staff %}
@@ -211,7 +211,7 @@ div.breadcrumbs {
     {% block messages %}
         {% if messages %}
         <ul class="messagelist">{% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+          <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
         {% endfor %}</ul>
         {% endif %}
     {% endblock messages %}
